@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Favicon Retriever</title>
+    <script src="popup.js"></script>
+    <script src="jszip.min.js"></script>
+    <style>
+      body {
+        width: 400px;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+      }
+      #iconGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        padding: 0;
+        margin-bottom: 20px;
+      }
+      .icon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        background-color: rgba(200, 200, 200, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s;
+        pointer-events: none; /* 初始状态下禁用点击 */
+        opacity: 0.7; /* 初始状态下略微透明 */
+      }
+      .icon-item.selected {
+        background-color: rgba(100, 150, 255, 0.2);
+      }
+      .icon-item img {
+        max-width: 64px;
+        max-height: 64px;
+        object-fit: contain;
+        margin-bottom: 5px;
+      }
+      .icon-item span {
+        font-size: 10px;
+        margin-top: 5px;
+      }
+      .icon-item.selectable {
+        pointer-events: auto; /* 可选择状态下启用点击 */
+        opacity: 1; /* 可选择状态下完全不透明 */
+      }
+      #downloadBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 20px;
+        border: none;
+        background-color: #4a90e2;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s, opacity 0.3s;
+      }
+      #downloadBtn:hover:not(:disabled) {
+        background-color: #357ae8;
+      }
+      #downloadBtn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .spinner {
+        border: 2px solid #ffffff;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        margin-right: 10px;
+        display: none;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="iconGrid"></div>
+    <button id="downloadBtn">
+      <div class="spinner"></div>
+      <span>捕获中</span>
+    </button>
+  </body>
+</html>
