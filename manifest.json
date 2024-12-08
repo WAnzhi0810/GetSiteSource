@@ -1,11 +1,35 @@
 {
   "manifest_version": 2,
-  "name": "Favicon Retriever",
+  "name": "Icon Finder",
   "version": "1.0",
-  "description": "Retrieves all favicons from the current website",
-  "permissions": ["activeTab", "<all_urls>", "downloads"],
+  "description": "Find and download website icons in various sizes",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png",
+    "256": "icon256.png"
+  },
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "tabs",
+    "*://*/*"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon48.png",
+      "128": "icon128.png",
+      "256": "icon256.png"
+    },
+    "default_width": 420,
+    "default_height": 500
+  },
+  "background": {
+    "scripts": ["jszip.min.js", "background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
